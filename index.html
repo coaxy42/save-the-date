@@ -1,0 +1,285 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Shauna &amp; Billy Save the Date</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&family=Allura&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+/* Layout: one centred stage. An all-ivory envelope with calligraphy on a deep wine ground; the lettering fades, the flap lifts, the card rises out and settles full size. */
+:root {
+  --ground: #1E060D;
+  --ground-lift: #3A0F1C;
+  --ivory: #F7F0E1;
+  --ivory-edge: #D8C9B4;
+  --ivory-shade: #EDE2CF;
+  --paper: #FAF4E6;
+  --wine: #4E0F1F;
+  --ink: #4E0F1F;
+  --liner: #5E1727;
+  --liner-hi: #7A2234;
+  --muted: #DCC8C4;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Jost', system-ui, sans-serif;
+  --font-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --font-script-s: 'Allura', 'Snell Roundhand', cursive;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  margin: 0;
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background-color: var(--ground);
+  background-image: radial-gradient(ellipse at 50% 42%, var(--ground-lift) 0%, transparent 68%);
+  color: var(--muted);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+.stage { position: relative; height: 100%; overflow: hidden; }
+
+.scene {
+  position: absolute; left: 50%; top: 50%;
+  width: 600px; height: 760px;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) translateY(calc(var(--k, 1) * -95px)) scale(var(--k, 1));
+  transition: transform 2.1s cubic-bezier(.35, 0, .15, 1);
+  perspective: 1400px;
+}
+.scene.reveal { transform: translate(-50%, -50%) translateY(0px) scale(var(--k, 1)); }
+
+/* envelope pieces share one footprint: 420 x 290 at (90, 330) */
+.env { position: absolute; left: 90px; top: 330px; width: 420px; height: 290px; }
+.env svg { display: block; width: 100%; height: 100%; }
+.back   { z-index: 1; }
+.pocket { z-index: 3; }
+.flap   { z-index: 5; height: 170px; transform-origin: 50% 0; transform-style: preserve-3d; }
+.back, .pocket, .flap, .shadow { transition: opacity 1.8s .3s ease; }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.face svg { height: 170px; }
+.face.inner { transform: rotateY(180deg); }
+.shadow {
+  position: absolute; left: 110px; top: 596px; width: 380px; height: 54px; z-index: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.5), transparent 70%);
+  filter: blur(6px);
+}
+
+.scene.open .flap { animation: flapOpen 1.5s cubic-bezier(.4, 0, .2, 1) forwards; }
+@keyframes flapOpen {
+  0%    { transform: rotateX(0deg);   z-index: 5; }
+  50%   { transform: rotateX(90deg);  z-index: 5; }
+  50.1% { z-index: 1; }
+  100%  { transform: rotateX(180deg); z-index: 1; }
+}
+
+/* the card is drawn at 700 x 980 and scaled */
+.card {
+  position: absolute; left: 50%; top: 0; margin-left: -350px;
+  width: 700px; height: 980px; box-sizing: border-box;
+  padding: 56px 48px;
+  background: var(--paper); color: #4E0F1F;
+  font-family: var(--font-body);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  transform-origin: 50% 0;
+  transform: translateY(345px) scale(.27) rotate(0deg);
+  z-index: 2;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .5), 0 0 60px rgba(240, 176, 190, .25);
+  transition: transform 1.9s cubic-bezier(.25, .1, .25, 1);
+}
+.scene.rising .card { transform: translateY(45px) scale(.27) rotate(-2.5deg); }
+.scene.reveal .card {
+  z-index: 9;
+  transform: translateY(var(--rty, 20px)) scale(var(--rs, .7)) rotate(0deg);
+  transition: transform 2.1s cubic-bezier(.35, 0, .15, 1);
+}
+.scene.reveal .back, .scene.reveal .pocket, .scene.reveal .flap, .scene.reveal .shadow { opacity: 0; }
+
+/* warm light behind the card as it comes out */
+.glow {
+  position: absolute; left: -20px; top: 60px; width: 640px; height: 640px; z-index: 0;
+  border-radius: 50%; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle, rgba(240, 176, 190, .55) 0%, rgba(210, 110, 130, .22) 38%, transparent 68%);
+  transition: opacity 1.8s ease;
+}
+.scene.open .glow { opacity: 1; }
+.scene.reveal .glow { opacity: .5; }
+
+/* calligraphy across the envelope front */
+.script {
+  position: absolute; left: 90px; top: 330px; width: 420px; height: 290px; z-index: 6;
+  display: flex; align-items: center; justify-content: center; pointer-events: none;
+  transition: opacity 1.1s ease;
+}
+.script-in {
+  display: flex; flex-direction: column; align-items: flex-start;
+  transform: rotate(-12deg); color: var(--ink); font-family: var(--font-script); line-height: 1; white-space: nowrap;
+}
+.script .l1 { font-size: 54px; margin-left: -16px; }
+.script .l2 { font-size: 68px; margin-left: 22px; margin-top: -2px; }
+.script .s { font-family: var(--font-script-s); font-size: 1.12em; }
+.scene.started .script { opacity: 0; }
+.tap {
+  position: absolute; left: 90px; top: 330px; width: 420px; height: 290px; z-index: 10;
+  padding: 0; border: 0; border-radius: 6px; background: none; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.tap:disabled { cursor: default; pointer-events: none; }
+.tap:focus-visible { outline: 2px solid var(--ivory); outline-offset: 8px; }
+.hint {
+  position: absolute; left: 0; width: 600px; top: 652px; margin: 0;
+  text-align: center; font-family: var(--font-display); font-style: italic; font-size: 26px; color: var(--muted);
+  transition: opacity .5s ease;
+}
+.scene.playing .hint { opacity: 0; }
+
+.replay {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  padding: 12px 22px; border: 1px solid var(--muted); border-radius: 999px;
+  background: rgba(30, 6, 13, .55); color: var(--ivory);
+  font: 500 12px/1 var(--font-body); letter-spacing: .3em; text-transform: uppercase; padding-left: calc(22px + .3em);
+  cursor: pointer; z-index: 20;
+}
+.replay:hover { background: rgba(122, 34, 52, .6); }
+.replay:focus-visible { outline: 2px solid var(--ivory); outline-offset: 3px; }
+
+.instant, .instant * { transition: none !important; animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .scene, .card { transition-duration: .01ms; }
+}
+</style>
+
+<div class="stage" id="stage">
+  <div class="scene" id="scene">
+    <div class="shadow"></div>
+
+    <div class="env back">
+      <svg viewBox="0 0 420 290" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="inBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D3B9"/><stop offset="1" stop-color="#EDE2CF"/></linearGradient>
+        </defs>
+        <rect width="420" height="290" fill="url(#inBack)"/>
+      </svg>
+    </div>
+
+    <div class="glow"></div>
+
+    <div class="card" id="card" aria-hidden="true">
+      <div style="font-size: 16px; font-weight: 500; letter-spacing: 0.55em; text-transform: uppercase; padding-left: 0.55em">Save the date</div>
+      <div style="font-family: 'Pinyon Script', cursive; font-weight: 400; font-size: 112px; line-height: 1.05; margin-top: 22px"><span style="font-family: 'Allura', cursive; font-size: 1.08em">S</span>hauna</div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: 40px; line-height: 1">&amp;</div>
+      <div style="font-family: 'Pinyon Script', cursive; font-weight: 400; font-size: 112px; line-height: 1.05">Billy</div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 30px; font-style: italic; margin-top: 18px">are getting married</div>
+      <div style="width: 120px; height: 1px; background: #4E0F1F; margin-top: 22px; margin-bottom: 22px"></div>
+      <div role="group" aria-label="November 2027 calendar, Saturday the 20th marked with a heart" style="width: 360px">
+        <div style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 40px; line-height: 1.1; letter-spacing: 0.04em; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 0.5px solid #4E0F1F">November 2027</div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); font-size: 13px; font-weight: 500; letter-spacing: 0.1em; line-height: 26px; text-align: center">
+          <div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div><div>S</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-auto-rows: 40px; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 26px; line-height: 40px; text-align: center">
+          <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+          <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+          <div>15</div><div>16</div><div>17</div><div>18</div><div>19</div>
+          <div style="position: relative; font-weight: 600"><span>20</span><svg aria-hidden="true" width="66" height="57" viewBox="0 0 60 52" fill="none" stroke="#4E0F1F" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: -7px; top: -8px; overflow: visible"><path d="M31 49 C22 42 6 33 4 20 C2 9 12 3 21 6 C26 8 29 12 30 15 C32 9 38 4 46 5 C55 6 59 16 55 26 C51 35 40 42 29 50 L23 45" stroke-width="2.1"/><path d="M8 15 C10 9 15 7 20 8" stroke-width="1.1" opacity="0.7"/><path d="M47 8 C52 9 55 13 55 18" stroke-width="1.1" opacity="0.7"/></svg></div>
+          <div>21</div>
+          <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+          <div>29</div><div>30</div>
+        </div>
+      </div>
+      <div style="font-size: 16px; font-weight: 500; letter-spacing: 0.5em; text-transform: uppercase; margin-top: 24px; padding-left: 0.5em">12PM</div>
+      <div style="font-size: 16px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; margin-top: 10px; padding-left: 0.35em">St Mary’s Cathedral</div>
+      <div style="font-size: 16px; font-weight: 500; letter-spacing: 0.5em; text-transform: uppercase; margin-top: 10px; padding-left: 0.5em">Killarney</div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; margin-top: 28px">Formal invitation to follow</div>
+    </div>
+
+    <div class="env pocket">
+      <svg viewBox="0 0 420 290" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="pkBottom" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF6EA"/><stop offset="1" stop-color="#F0E6D3"/></linearGradient>
+        </defs>
+        <polygon points="0,0 210,130 0,290" fill="#F1E8D6" stroke="#D8C9B4" stroke-width="1.2" stroke-linejoin="round"/>
+        <polygon points="420,0 210,130 420,290" fill="#F1E8D6" stroke="#D8C9B4" stroke-width="1.2" stroke-linejoin="round"/>
+        <polygon points="0,290 210,130 420,290" fill="url(#pkBottom)" stroke="#D8C9B4" stroke-width="1.2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="env flap">
+      <div class="face front">
+        <svg viewBox="0 0 420 170" aria-hidden="true" focusable="false">
+          <polygon points="0,0 420,0 210,170" fill="#F7F0E1" stroke="#D8C9B4" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="face inner">
+        <svg viewBox="0 0 420 170" aria-hidden="true" focusable="false">
+          <polygon points="0,0 420,0 210,170" fill="#EBDFC8" stroke="#D8C9B4" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="script" aria-hidden="true">
+      <div class="script-in">
+        <span class="l1"><span class="s">S</span>ee you in</span>
+        <span class="l2">November?</span>
+      </div>
+    </div>
+    <button class="tap" id="tap" type="button" aria-label="Open the invitation"></button>
+
+    <p class="hint">Tap the envelope to open</p>
+  </div>
+  <button class="replay" id="replay" type="button" hidden>Replay</button>
+</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var scene = document.getElementById('scene');
+  var card = document.getElementById('card');
+  var tap = document.getElementById('tap');
+  var replay = document.getElementById('replay');
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var m = reduce ? 0.02 : 1;
+  var timers = [];
+
+  function fit() {
+    var w = stage.clientWidth, h = stage.clientHeight;
+    var k = Math.min(w / 470, h / 640, 1.35);
+    var s = Math.min(w * 0.94 / 700, h * 0.94 / 980) / k;
+    scene.style.setProperty('--k', k);
+    scene.style.setProperty('--rs', s);
+    scene.style.setProperty('--rty', (380 - 490 * s) + 'px');
+  }
+  function later(fn, ms) { timers.push(setTimeout(fn, ms * m)); }
+
+  function play() {
+    if (scene.classList.contains('playing')) return;
+    tap.disabled = true;
+    scene.classList.add('playing', 'started');
+    later(function () { scene.classList.add('open'); }, 1000);
+    later(function () { scene.classList.add('rising'); }, 2600);
+    later(function () {
+      scene.classList.add('reveal');
+      card.removeAttribute('aria-hidden');
+    }, 4500);
+    later(function () { replay.hidden = false; }, 6900);
+  }
+  function reset() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    replay.hidden = true;
+    scene.classList.add('instant');
+    scene.classList.remove('playing', 'started', 'open', 'rising', 'reveal');
+    card.setAttribute('aria-hidden', 'true');
+    tap.disabled = false;
+    void scene.offsetWidth;
+    scene.classList.remove('instant');
+    tap.focus();
+  }
+
+  tap.addEventListener('click', play);
+  replay.addEventListener('click', reset);
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
+
+</body></html>
